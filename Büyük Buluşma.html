@@ -39,7 +39,7 @@
 </head>
 <body>
     <div class="countdown">
-        <h1>Büyük Buluşmaya Kalan Süre</h1>
+        <h1>21 Ocak 2025 09:15'e Kalan Süre</h1>
         <div class="time">
             <div>
                 <span id="days">0</span>
@@ -61,11 +61,9 @@
     </div>
     <script>
         function updateCountdown() {
-            // Türkiye saatine göre hedef tarih
-            const targetDate = new Date("2025-01-21T09:15:00+03:00");
+            // Tarihi UTC formatına çevir
+            const targetDate = new Date("2025-01-21T09:15:00Z");
             const now = new Date();
-
-            // Farkı hesapla
             const diff = targetDate - now;
 
             if (diff <= 0) {
@@ -78,14 +76,13 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            // Sayacı güncelle
             document.getElementById("days").textContent = days;
             document.getElementById("hours").textContent = hours;
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
         }
 
-        // Sayfa yüklendiğinde hemen çalıştır ve her saniye güncelle
+        // Sayfayı açınca hemen çalışması ve her saniye güncellenmesi
         updateCountdown();
         setInterval(updateCountdown, 1000);
     </script>
