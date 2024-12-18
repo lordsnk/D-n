@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geri Sayım Sayacı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f8ff;
+            color: #333;
+        }
+        .countdown {
+            text-align: center;
+        }
+        .countdown h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .time {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .time div {
+            font-size: 1.5em;
+        }
+        .time span {
+            display: block;
+            font-size: 0.75em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown">
+        <h1>Büyük Buluşmaya Kalan Süre</h1>
+        <div class="time">
+            <div>
+                <span id="days">0</span>
+                Gün
+            </div>
+            <div>
+                <span id="hours">0</span>
+                Saat
+            </div>
+            <div>
+                <span id="minutes">0</span>
+                Dakika
+            </div>
+            <div>
+                <span id="seconds">0</span>
+                Saniye
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateCountdown() {
+            // Türkiye saatine göre hedef tarih
+            const targetDate = new Date("2025-01-21T09:15:00+03:00");
+            const now = new Date();
+
+            // Farkı hesapla
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.querySelector('.countdown').innerHTML = "<h1>Geri Sayım Tamamlandı!</h1>";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Sayacı güncelle
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        // Sayfa yüklendiğinde hemen çalıştır ve her saniye güncelle
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
